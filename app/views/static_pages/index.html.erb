@@ -1,0 +1,31 @@
+<div class="section">
+  <div class="container">
+    <div class="column">
+      <div class="column">
+        <div class="box">
+          <%= form_with(method: :get, local: true) do |form| %>
+            <%= form.label :user_id, "Enter a flickr user ID", class: "title is-4"%>
+            <%= form.text_field :user_id, class: "input", placeholder: "User ID" %>
+            <br />
+            <br />
+            <%= form.submit "Search", class: "button is-info" %>
+          <% end %>
+        </div>
+      </div>
+      <% if @photos %>
+        <div class="column">
+          <div class="box">
+            <div class="title is-4">
+              Pictures of <%= params[:user_id] %>
+            </div>
+            <% @photos.each do |photo| %>
+              <%= link_to(Flickr.url_b(photo)) do %>
+                <img src="<%= Flickr.url_q(photo) %>"/>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
